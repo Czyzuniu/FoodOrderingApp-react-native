@@ -14,7 +14,19 @@ import {
   FlatList
 } from 'react-native';
 
-const menuItems = ['Pizza','Drink' ,'Deserts']
+const menuItems = [
+  {
+    name:'Food',
+    path:require('./src/assets/img/food.jpg')
+  },
+  {
+    name:'Drinks',
+    path:require('./src/assets/img/drinks.jpg')
+  },
+  {
+    name:'Deserts',
+    path:require('./src/assets/img/deserts.jpg')
+  }]
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -23,7 +35,7 @@ export default class App extends Component<Props> {
       <View style={styles.container}>
         <FlatList
           data={menuItems}
-          renderItem={({item}) => <MainMenuItem menuItemName={item}></MainMenuItem>}
+          renderItem={({item}) => <MainMenuItem menuItemName={item.name} path={item.path}></MainMenuItem>}
         />
       </View>
     );

@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Text,
   View,
-  Dimensions
+  Dimensions,
+  ImageBackground
 } from 'react-native';
 
 
@@ -18,7 +19,9 @@ export default class MainMenuItem extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-      		<Text>{this.props.menuItemName}</Text>
+        <ImageBackground source={this.props.path}>
+          <Text>{this.props.menuItemName}</Text>
+        </ImageBackground>
       </View>
     );
   }
@@ -29,7 +32,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
     borderColor:'black',
     borderWidth:1,
     margin:5, 
