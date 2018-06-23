@@ -1,28 +1,28 @@
 
 import React, { Component } from 'react';
+import { Text } from 'react-native-elements'
 import {
   Platform,
   StyleSheet,
-  Text,
   View,
   Dimensions,
   ImageBackground
 } from 'react-native';
 
 
-let height = Dimensions.get('window').height
-let width = Dimensions.get('window').width
+const height = Dimensions.get('window').height
+const width = Dimensions.get('window').width
 
 
 type Props = {};
 export default class MainMenuItem extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <ImageBackground source={this.props.path}>
-          <Text>{this.props.menuItemName}</Text>
-        </ImageBackground>
-      </View>
+      <ImageBackground style={styles.container} source={this.props.path}>
+        <View style={styles.overlay}>
+            <Text h2 style={styles.itemText} fontFamily="notoserif">{this.props.menuItemName}</Text>
+        </View>
+      </ImageBackground>
     );
   }
 }
@@ -30,14 +30,19 @@ export default class MainMenuItem extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
     borderColor:'black',
     borderWidth:1,
     margin:5, 
+  },
+  overlay: {
     height:150,
-    width:width - (width / 100) * 3.5
+    width:width - (width / 100) * 3.5,
+    backgroundColor:'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+    itemText: {
+    color:'white'
   }
-
 
 })

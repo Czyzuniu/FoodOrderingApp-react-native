@@ -1,18 +1,20 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
-import MainMenuItem from './src/components/MainMenuItem.js'
 import {
-  Platform,
   StyleSheet,
   Text,
   View,
-  FlatList
-} from 'react-native';
+  FlatList,
+  Dimensions
+} from 'react-native'
+
+import { Header } from 'react-native-elements'
+
+import SideMenu from 'react-native-side-menu'
+import Menu from './src/components/Menu'
+import MainMenuItem from './src/components/MainMenuItem'
+
+const height = Dimensions.get('window').height
+const width = Dimensions.get('window').width
 
 const menuItems = [
   {
@@ -28,26 +30,77 @@ const menuItems = [
     path:require('./src/assets/img/deserts.jpg')
   }]
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+
+    this.state = {
+      isOpen: false,
+      selectedItem: 'About',
+    };
+  }
+
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
+  }
+
+  updateMenuState(isOpen) {
+    this.setState({ isOpen });
+  }
+
+  onMenuItemSelected = item =>
+    this.setState({
+      isOpen: false,
+      selectedItem: item,
+    });
+
   render() {
+    const menu = <Menu/>;
+
     return (
-      <View style={styles.container}>
-        <FlatList
-          data={menuItems}
-          renderItem={({item}) => <MainMenuItem menuItemName={item.name} path={item.path}></MainMenuItem>}
+
+      <SideMenu
+        menu={menu}
+        isOpen={this.state.isOpen}
+        onChange={isOpen => this.updateMenuState(isOpen)}
+        openMenuOffset={(width / 100) * 75}
+      >
+        <Header
+          leftComponent={{ icon: 'menu', onPress: () => this.toggle() }}
         />
-      </View>
+        <View style={styles.container}>
+          <View style={styles.rows}>
+            <FlatList
+              data={menuItems}
+              renderItem={({item}) => <MainMenuItem menuItemName={item.name} path={item.path}></MainMenuItem>}
+            />
+          </View>
+        </View>
+
+        </SideMenu>
     );
   }
 }
 
+
+
 const styles = StyleSheet.create({
+  button: {
+    position: 'absolute',
+    top: 20,
+    padding: 10,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  rows: {
     flexDirection:'row',
     flexWrap:'wrap'
   }
