@@ -8,13 +8,15 @@ import {
   Dimensions
 } from 'react-native'
 
-import HeaderBar from '../components/HeaderBar'
+
 
 export default class MyOrders extends Component {
   render() {
   return (
     <View style={styles.container}>
-     <HeaderBar navigation={this.props.navigation}/>
+      <Header
+        leftComponent={{ icon: 'menu', onPress: () => this.props.navigation.openDrawer() }}
+      />
       <View style={styles.main}>
         <Text style={{textAlign:'center'}}>You have no orders :(</Text>
       </View>
