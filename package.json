@@ -1,5 +1,5 @@
 {
-  "name": "FoodOrderingApp",
+  "name": "reactNativeStannahDemo",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,10 +8,14 @@
   },
   "dependencies": {
     "elements": "^0.6.0",
+    "moment": "^2.22.2",
     "react": "16.3.1",
     "react-native": "^0.55.4",
+    "react-native-camera": "^1.2.0",
     "react-native-drawer": "^2.5.0",
     "react-native-elements": "^1.0.0-beta5",
+    "react-native-fs": "^2.11.15",
+    "react-native-image-picker": "^0.26.10",
     "react-native-side-menu": "^1.1.3",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.5.2"

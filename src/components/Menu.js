@@ -6,38 +6,31 @@ import {
   Platform,
   StyleSheet,
   View,
-  Dimensions,
-  ImageBackground,
-  FlatList,
-  ScrollView
+  FlatList
 } from 'react-native';
 
 
 const menuList = [
-    {
-        title:"My Info",
-        list: [
-          {
-            title: 'Konrad Kolpak',
-            icon: 'person-pin',
-            navigator:'HomeView'
-          },
-          {
-            title: 'My orders',
-            icon: 'receipt',
-            navigator:'MyOrdersView'
-          },
-          {
-            title: 'My Reviews',
-            icon: 'rate-review'
-          },
-          {
-            title: 'My Favourite Restuarants',
-            icon: 'star',
-            color:'yellow'
-          }
-        ]
-    }
+  {
+    title: 'Home',
+    icon: 'home',
+    navigator:'HomeView'
+  },
+  {
+    title: 'Incidents',
+    icon: 'warning',
+    navigator:'IncidentsView'
+  },
+  {
+    title: 'Expenses',
+    icon: 'receipt',
+    navigator:'MyOrdersView'
+  },
+  {
+    title: 'Settings',
+    icon: 'settings',
+    navigator:'SettingsView'
+  }
 ]
 
 export default class MenuComponent extends Component<Props> {
@@ -49,45 +42,41 @@ export default class MenuComponent extends Component<Props> {
         this.props.navigation.dispatch(navigateAction);
     }
 
-    render() {
-    const menu = []
 
-    for (let i of menuList) {
-        menu.push(
-            <ListItem
-                key={i}
-                title={i.title}
-                titleStyle={{color:'white', textAlign:'center'}}
-                containerStyle={{ backgroundColor:'gray',padding:12, justifyContent:'center'}}
-            />
-        )
-        for (let s of i.list) {
-            menu.push (
+
+  render() {
+    return (
+      <View style={styles.container}>
+          <FlatList
+            data={menuList}
+            renderItem={({item}) => (
                 <ListItem
-                    key={s}
-                    leftIcon={{ name: s.icon, color:'red' }}
-                    title={s.title}
-                    badge={{ value: 3, textStyle: { color: 'orange' }, containerStyle: { backgroundColor: 'black' }}}
-                    containerStyle={{ backgroundColor:'snow', padding:20, borderBottomWidth:2}}
-                    titleStyle={{color:'black', fontSize:18, fontFamily:'notoserif'}}
-                    onPress={this.navigateToScreen(s.navigator)}
-                /> 
-            )
-        }
-    }
-        return (
-        <ScrollView style={styles.menu}>
-        {menu}
-        </ScrollView>  
-        );
-    }
+                  title={item.title}
+                  key={item}
+                  leftIcon={{ name: item.icon, color:'red' }}
+                  badge={{ value: 3, textStyle: { color: 'orange' }, containerStyle: { backgroundColor: 'black' }}}
+                  containerStyle={{ backgroundColor:'snow', padding:20, borderBottomWidth:2}}
+                  titleStyle={{color:'black', fontSize:18, fontFamily:'arial'}}
+                  onPress={this.navigateToScreen(item.navigator)}
+                />
+              )
+          }
+          keyExtractor={(item, index) => index.toString()}
+          />
+      </View>
+    );
+  }
 }
+
+
+                  
+   
 
 
 const styles = StyleSheet.create({
   menu: {
     flex:1,
-    backgroundColor:'snow',
+    flexDirection:'column'
   }
 })
 

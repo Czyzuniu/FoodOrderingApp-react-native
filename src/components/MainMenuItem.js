@@ -20,7 +20,7 @@ export default class MainMenuItem extends Component<Props> {
     return (
       <ImageBackground style={styles.container} source={this.props.path}>
         <View style={styles.overlay}>
-            <Text h2 style={styles.itemText} fontFamily="notoserif">{this.props.menuItemName}</Text>
+            <Text h2 style={styles.itemText} fontFamily="arial">{this.props.menuItemName}</Text>
         </View>
       </ImageBackground>
     );
